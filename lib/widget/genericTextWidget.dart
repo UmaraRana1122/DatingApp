@@ -1,0 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
+Widget genericTextwidget(String text,
+    {fontSize, FontWeight? fontWeight, Color? color}) {
+  return Text(
+    text,
+    textAlign: TextAlign.center,
+    style: GoogleFonts.lobster(
+        color: color ?? Colors.black,
+        fontSize: fontSize ?? 20.sp,
+        fontWeight: fontWeight ?? FontWeight.w700),
+  );
+}
