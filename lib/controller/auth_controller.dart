@@ -13,6 +13,8 @@ class AuthController extends GetxController {
 
   TextEditingController email = TextEditingController();
   TextEditingController name = TextEditingController();
+  TextEditingController phone = TextEditingController();
+
   TextEditingController password = TextEditingController();
   TextEditingController cPassword = TextEditingController();
 
@@ -25,6 +27,11 @@ class AuthController extends GetxController {
   ];
   bool isUserAuthorized = false;
 
+  final RxBool isLoading = false.obs;
+
+  void setLoading(bool value) {
+    isLoading.value = value;
+  }
 
   suggestName() async {
     if (currentUser.userName == "") {
