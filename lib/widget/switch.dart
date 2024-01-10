@@ -12,7 +12,7 @@ Widget switchWidget(bool isUserAuthorized, String text, IconData icon) {
           children: [
             Icon(
               icon,
-              color: Color(0xff753748),
+              color: Color(0xffae7383),
               size: 4.h,
             ),
             SizedBox(
@@ -41,7 +41,7 @@ Widget switchWidget(bool isUserAuthorized, String text, IconData icon) {
                 color: Colors.white,
                 width: 1.0,
               ),
-              activeColor: Color(0xff753748),
+              activeColor: Color(0xffae7383),
               inactiveColor: Colors.grey,
               activeIcon: CircleAvatar(
                 backgroundColor: Colors.white,

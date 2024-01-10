@@ -27,14 +27,10 @@ class ProfileInfoScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CircleAvatar(
-                        radius: 7.h,
-                        backgroundColor: Color(0xff753748),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.transparent,
-                          radius: 6.h,
-                          backgroundImage: AssetImage(
-                            'assets/images/2.png',
-                          ),
+                        backgroundColor: Colors.transparent,
+                        radius: 6.h,
+                        backgroundImage: AssetImage(
+                          'assets/images/2.png',
                         ),
                       ),
                     ),
@@ -44,13 +40,13 @@ class ProfileInfoScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        text_widget("Jannet Doe", fontSize: 22.sp),
+                        text_widget("Jannet Doe", fontSize: 20.sp),
                         Container(
-                          height: 5.h,
-                          width: 35.w,
+                          height: 4.h,
+                          width: 25.w,
                           decoration: BoxDecoration(
-                              color: Color(0xff753748),
-                              borderRadius: BorderRadius.circular(15)),
+                              color: Color(0xffae7383),
+                              borderRadius: BorderRadius.circular(17)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -59,10 +55,10 @@ class ProfileInfoScreen extends StatelessWidget {
                                 color: Colors.white,
                               ),
                               SizedBox(
-                                width: 2.w,
+                                width: 1.w,
                               ),
                               text_widget("Edit Profile",
-                                  fontSize: 15.sp, color: Colors.white)
+                                  fontSize: 13.sp, color: Colors.white)
                             ],
                           ),
                         )

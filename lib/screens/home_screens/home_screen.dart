@@ -32,27 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.center,
               child: Image.asset(
                 pics[i],
-                height: 70.h, 
+                height: 70.h,
               )),
         ],
-        likeAction: () {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Liked ${text[i]}"),
-            duration: Duration(milliseconds: 500),
-          ));
-        },
-        nopeAction: () {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Nope ${text[i]}"),
-            duration: Duration(milliseconds: 500),
-          ));
-        },
-        superlikeAction: () {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Superliked ${text[i]}"),
-            duration: Duration(milliseconds: 500),
-          ));
-        },
         onSlideUpdate: (SlideRegion? region) async {
           print("Region $region");
         },
@@ -76,11 +58,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Image.asset(
                     "assets/icons/4.png",
-                    height: 4.h,
+                    height: 3.h,
+                    color: Color(
+                      (0xff753748),
+                    ),
                   ),
                   Image.asset(
                     "assets/icons/5.png",
-                    height: 4.h,
+                    height: 3.h,
+                    color: Color(
+                      (0xff753748),
+                    ),
                   ),
                   InkWell(
                     onTap: () {
@@ -88,7 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     child: Image.asset(
                       "assets/icons/6.png",
-                      height: 4.h,
+                      height: 3.h,
+                      color: Color(
+                        (0xff753748),
+                      ),
                     ),
                   ),
                 ],
@@ -105,12 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (BuildContext context, int index) {
                         return _swipeItems[index].content[0];
                       },
-                      onStackFinished: () {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("Profiles Finished"),
-                          duration: Duration(milliseconds: 500),
-                        ));
-                      },
+                      onStackFinished: () {},
                       itemChanged: (SwipeItem item, int index) {
                         print(
                             "item: ${_swipeItems[index].content[0]}, index: $index");
@@ -125,7 +111,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.green),
                         ),
-                        child: Text('Like'),
+                        child: Text(
+                          'Like',
+                        ),
                       ),
                       nopeTag: Container(
                         margin: const EdgeInsets.all(15.0),
@@ -154,19 +142,28 @@ class _HomeScreenState extends State<HomeScreen> {
                           onPressed: () {
                             _matchEngine!.currentItem?.nope();
                           },
-                          child: Text("Nope"),
+                          child: Text(
+                            "Nope",
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ),
                         ElevatedButton(
                           onPressed: () {
                             _matchEngine!.currentItem?.superLike();
                           },
-                          child: Text("Superlike"),
+                          child: Text(
+                            "Superlike",
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ),
                         ElevatedButton(
                           onPressed: () {
                             _matchEngine!.currentItem?.like();
                           },
-                          child: Text("Like"),
+                          child: Text(
+                            "Like",
+                            style: TextStyle(color: Colors.black),
+                          ),
                         ),
                       ],
                     ),

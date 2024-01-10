@@ -12,7 +12,7 @@ Widget chatWidget(String text) {
           height: 6.h,
           width: 42.w,
           decoration: BoxDecoration(
-              color: Color(0xffF94F69),
+              color: Color(0xffae7383),
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(17),
                   bottomLeft: Radius.circular(17),

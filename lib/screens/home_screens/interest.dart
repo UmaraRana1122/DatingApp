@@ -1,5 +1,5 @@
 import 'package:datingapp/Widget/button.dart';
-import 'package:datingapp/screens/auth/Gender.dart';
+import 'package:datingapp/screens/home_screens/home_screen.dart';
 import 'package:datingapp/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -87,9 +87,12 @@ class InterestScreen extends StatelessWidget {
                       Spacer(),
                       InkWell(
                           onTap: () {
-                            Get.to(() => GenderScreen());
+                            Get.to(() => HomeScreen());
                           },
-                          child: button(context, "Next Step"))
+                          child: button(context, "Next Step")),
+                      Spacer(
+                        flex: 1,
+                      )
                     ],
                   ),
                 ),

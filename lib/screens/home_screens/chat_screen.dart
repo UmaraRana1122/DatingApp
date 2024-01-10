@@ -86,7 +86,7 @@ class ChatScreen extends StatelessWidget {
                               height: 6.h,
                               width: 50.w,
                               decoration: BoxDecoration(
-                                  color: Color(0xffFB95A5),
+                                  color: Color(0xffde9eb0),
                                   borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(17),
                                     bottomLeft: Radius.circular(17),
@@ -145,7 +145,7 @@ class ChatScreen extends StatelessWidget {
                           height: 6.h,
                           width: 50.w,
                           decoration: BoxDecoration(
-                              color: Color(0xffFB95A5),
+                              color: Color(0xffde9eb0),
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(17),
                                 bottomLeft: Radius.circular(17),
@@ -168,7 +168,7 @@ class ChatScreen extends StatelessWidget {
                               height: 6.h,
                               width: 30.w,
                               decoration: BoxDecoration(
-                                  color: Color(0xffFB95A5),
+                                  color: Color(0xffde9eb0),
                                   borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(17),
                                     bottomLeft: Radius.circular(17),

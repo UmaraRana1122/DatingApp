@@ -1,5 +1,4 @@
 import 'package:datingapp/Widget/text_widget.dart';
-import 'package:datingapp/screens/boarding_screens/boarding_screen.dart';
 import 'package:datingapp/widget/button.dart';
 import 'package:datingapp/widget/genericTextWidget.dart';
 import 'package:flutter/material.dart';

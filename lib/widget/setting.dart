@@ -15,7 +15,7 @@ Widget settingWidget(
           children: [
             Icon(
               icon,
-              color: Color(0xff753748),
+              color: Color(0xffae7383),
               size: 4.h,
             ),
             SizedBox(
