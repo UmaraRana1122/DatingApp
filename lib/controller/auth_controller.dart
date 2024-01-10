@@ -23,6 +23,8 @@ class AuthController extends GetxController {
     "Femal",
     "Anyone",
   ];
+  bool isUserAuthorized = false;
+
 
   suggestName() async {
     if (currentUser.userName == "") {

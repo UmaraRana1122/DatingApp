@@ -1,4 +1,4 @@
-import 'package:datingapp/screens/home_screens/profile_screen.dart';
+import 'package:datingapp/screens/home_screens/profile_info.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, screenType) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          home: ProfileScreen(
+          home: ProfileInfoScreen(
               // verificationId: '',
               ),
           // builder: EasyLoading.init(),
