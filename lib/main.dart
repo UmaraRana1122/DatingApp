@@ -1,22 +1,8 @@
-import 'package:datingapp/api/fire_store_api.dart';
-import 'package:datingapp/screens/auth/login.dart';
-import 'package:datingapp/screens/auth/otp_verification.dart';
-import 'package:datingapp/screens/auth/signup.dart';
-import 'package:datingapp/screens/home_screens/profile.dart';
-import 'package:datingapp/services/auth_services.dart';
-import 'package:datingapp/services/fire_store_service.dart';
-import 'package:datingapp/services/local_services.dart';
-import 'package:datingapp/splash.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:datingapp/screens/home_screens/profile_screen.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
-import 'models/user_model.dart';
-import 'screens/auth/forgot_password.dart';
-import 'services/global.dart';
 
 Future<void> main() async {
   // await onInit();
@@ -53,8 +39,8 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           home: ProfileScreen(
-            // verificationId: '',
-          ),
+              // verificationId: '',
+              ),
           // builder: EasyLoading.init(),
         );
       },

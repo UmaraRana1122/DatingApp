@@ -17,9 +17,12 @@ class AuthController extends GetxController {
   TextEditingController cPassword = TextEditingController();
 
   bool check = false;
-  bool isCheck = false;
-  bool check2 = false;
-  bool isCheck2 = false;
+  int currentIndex = 0;
+  List txts = [
+    "Male",
+    "Femal",
+    "Anyone",
+  ];
 
   suggestName() async {
     if (currentUser.userName == "") {
