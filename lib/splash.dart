@@ -1,5 +1,7 @@
 import 'package:datingapp/Widget/text_widget.dart';
 import 'package:datingapp/screens/boarding_screens/boarding_screen.dart';
+import 'package:datingapp/screens/home_screens/home_screen.dart';
+import 'package:datingapp/services/global.dart';
 import 'package:datingapp/widget/genericTextWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,7 +21,9 @@ class _SplashScreenState extends State<SplashScreen> {
         const Duration(seconds: 2),
         () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => OnboardingScreen()),
+              MaterialPageRoute(
+                  builder: (context) =>
+                      currentUser.id != '' ? HomeScreen() : OnboardingScreen()),
             ));
   }
 

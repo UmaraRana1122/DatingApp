@@ -1,5 +1,6 @@
 import 'package:datingapp/Widget/text_widget.dart';
 import 'package:datingapp/controller/auth_controller.dart';
+import 'package:datingapp/screens/auth/forgot_password.dart';
 import 'package:datingapp/screens/auth/signup.dart';
 import 'package:datingapp/widget/button.dart';
 import 'package:datingapp/widget/genericTextWidget.dart';
@@ -74,7 +75,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: () {
-                          _.gmailLogin();
+                          _.loginUser();
                         },
                         child: button(context, "Login")),
                     SizedBox(
@@ -82,8 +83,12 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Align(
                         alignment: Alignment.topRight,
-                        child:
-                            text_widget("Forgot Password?", fontSize: 16.sp)),
+                        child: InkWell(
+                            onTap: () {
+                              Get.to(() => ForgotPassword());
+                            },
+                            child: text_widget("Forgot Password?",
+                                fontSize: 16.sp))),
                     SizedBox(
                       height: 6.h,
                     ),

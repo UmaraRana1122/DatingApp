@@ -99,33 +99,40 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               SizedBox(
                 height: 2.h,
               ),
-              SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: List.generate(
-                      5,
-                      (index) => Padding(
-                        padding: EdgeInsets.only(right: 8.0),
-                        child: Container(
-                            height: 15.h,
-                            width: 35.w,
-                            decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(13),
-                            ),
-                            child: InkWell(
-                              onTap: () {
-                                pickImage();
-                              },
-                              child: Icon(
-                                Icons.add,
-                                size: 5.h,
-                              ),
-                            )),
+              image != null
+                  ? InkWell(
+                      onTap: () {
+                        pickImage();
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(13),
+                        child: Image.file(
+                          image!,
+                          height: 15.h,
+                          width: 35.w,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                  )),
-              image != null ? Image.file(image!) : Text("No image selected"),
+                    )
+                  : Container(
+                      height: 15.h,
+                      width: 35.w,
+                      decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(13),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          pickImage();
+                        },
+                        child: Icon(
+                          Icons.add,
+                          size: 5.h,
+                        ),
+                      )),
+              SizedBox(
+                height: 10,
+              ),
               Stack(
                 children: [
                   Align(

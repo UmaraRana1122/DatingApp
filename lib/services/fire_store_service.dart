@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-
 import 'package:datingapp/api/fire_store_api.dart';
 import 'package:datingapp/models/user_model.dart';
 
@@ -10,8 +9,12 @@ class FirestoreServices {
   final FirestoreApi _instance = FirestoreApi();
 
   registerUser() async {
-    await _instance.postANode(
-        path: 'userProfile/${currentUser.id}', data: currentUser.toJSON());
+    try {
+      await _instance.postANode(
+          path: 'userProfile/${currentUser.id}', data: currentUser.toJSON());
+    } catch (e) {
+      print('gvgh');
+    }
   }
 
   getMyUser(id) async {

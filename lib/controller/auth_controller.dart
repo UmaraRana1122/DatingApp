@@ -1,3 +1,4 @@
+import 'package:datingapp/screens/home_screens/home_screen.dart';
 import 'package:datingapp/services/auth_services.dart';
 import 'package:datingapp/services/fire_store_service.dart';
 import 'package:datingapp/services/global.dart';
@@ -150,9 +151,9 @@ class AuthController extends GetxController {
   }
 
   registerUser() async {
-    EasyLoading.show();
-
     if (name.text.isEmpty) {
+      EasyLoading.showInfo('Enter Name');
+
       return;
     }
 
@@ -204,11 +205,15 @@ class AuthController extends GetxController {
       String str = await Get.find<AuthServices>().emailSignUp();
 
       if (str == "") {
-        await Get.find<FirestoreServices>().registerUser();
-
+        EasyLoading.show();
+        try {
+          await Get.find<FirestoreServices>().registerUser();
+        } catch (e) {
+          print('error');
+        }
         EasyLoading.dismiss();
-
-        await Get.find<AuthServices>().sendEmailVarification();
+        Get.offAll(HomeScreen());
+        // await Get.find<AuthServices>().sendEmailVarification();
       } else {
         EasyLoading.showError(str);
       }

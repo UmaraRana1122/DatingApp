@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:datingapp/models/user_model.dart';
 import 'package:datingapp/screens/home_screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -175,5 +177,25 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+}
+
+Future<List<UserModel>> getAllUsers() async {
+  try {
+    QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('userProfile').get();
+
+    List<UserModel> users = [];
+
+    querySnapshot.docs.forEach((doc) {
+      // Assuming UserModel is your data model class
+      UserModel user = UserModel.toModel(doc.data() as Map<String, dynamic>);
+      users.add(user);
+    });
+    print(users.length);
+    return users;
+  } catch (e) {
+    print('Error getting users: $e');
+    return [];
   }
 }

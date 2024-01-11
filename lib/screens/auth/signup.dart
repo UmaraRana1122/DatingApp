@@ -50,6 +50,27 @@ class SignUpScreen extends StatelessWidget {
                         height: 2.h,
                       ),
                       TextField(
+                        controller: _.name,
+                        enabled: true,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(20),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: .3.w, color: Colors.black54),
+                              borderRadius: BorderRadius.circular(11.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.black54,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(11))),
+                            hintText: "Name"),
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      TextField(
                         controller: _.password,
                         enabled: true,
                         decoration: InputDecoration(

@@ -40,7 +40,6 @@ class AuthServices {
           email: currentUser.email, password: currentUser.initialPassword);
       if (fbUser.user != null) {
         currentUser.id = fbUser.user!.uid;
-        await sendEmailVarification();
         return "";
       }
       return "error";
