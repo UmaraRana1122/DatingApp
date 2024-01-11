@@ -1,5 +1,6 @@
 import 'package:datingapp/api/fire_store_api.dart';
 import 'package:datingapp/models/user_model.dart';
+import 'package:datingapp/screens/auth/login.dart';
 import 'package:datingapp/screens/auth/signup.dart';
 import 'package:datingapp/screens/home_screens/bottombar.dart';
 import 'package:datingapp/services/auth_services.dart';
@@ -14,11 +15,11 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   await onInit();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 Future<void> onInit() async {
