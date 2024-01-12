@@ -16,12 +16,17 @@ class UserModel1 {
       this.photoUrl});
 
   factory UserModel1.fromMap(map) {
+    if (map == null) {
+      return UserModel1(); // Return a default instance or handle it appropriately
+    }
+
     return UserModel1(
-        uid: map['uid'],
-        email: map['email'],
-        displayName: map['displayName'],
-        dateOfBirth: (map['dateOfBirth'] as Timestamp).toDate(),
-        photoUrl: map['photoUrl']);
+      uid: map['uid'],
+      email: map['email'],
+      displayName: map['displayName'],
+      dateOfBirth: (map['dateOfBirth'] as Timestamp).toDate(),
+      photoUrl: map['photoUrl'],
+    );
   }
 
   Map<String, dynamic> toMap() {
