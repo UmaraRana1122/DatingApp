@@ -56,6 +56,8 @@ dependencies:
   salomon_bottom_bar: ^3.3.2
   appinio_swiper: ^2.1.0
   equatable: 
+  intl: ^0.19.0
+  fancy_shimmer_image: ^2.0.3
 
 
 

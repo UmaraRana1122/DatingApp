@@ -1,7 +1,10 @@
 import 'package:datingapp/api/fire_store_api.dart';
 import 'package:datingapp/models/user_model.dart';
-import 'package:datingapp/screens/auth/login.dart';
+import 'package:datingapp/screens/home_screens/bottombar.dart';
+import 'package:datingapp/screens/home_screens/chat_screen.dart';
 import 'package:datingapp/screens/home_screens/home_screen.dart';
+import 'package:datingapp/screens/home_screens/pp.dart';
+import 'package:datingapp/screens/home_screens/profile_detail.dart';
 import 'package:datingapp/services/auth_services.dart';
 import 'package:datingapp/services/fire_store_service.dart';
 import 'package:datingapp/services/global.dart';
@@ -51,7 +54,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, screenType) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HomeScreen(),
+          home: ProfilePage(),
           builder: EasyLoading.init(),
         );
       },

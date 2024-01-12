@@ -4,10 +4,12 @@ import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datingapp/models/user_model.dart';
 import 'package:datingapp/screens/home_screens/chat_screen.dart';
+import 'package:datingapp/services/global.dart';
 import 'package:datingapp/widget/animationbutton.dart';
 import 'package:datingapp/widget/swipeleft.dart';
 import 'package:datingapp/widget/swiperight.dart';
 import 'package:datingapp/widget/unswipeButton.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,11 +26,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final AppinioSwiperController controller = AppinioSwiperController();
-  List cards = [
-    "assets/images/1.png",
-    "assets/images/2.png",
-    "assets/images/3.png",
-  ];
 
   @override
   void initState() {
@@ -92,9 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       onEnd: () {
                         _onEnd();
                       },
-                      cardCount: cards.length,
+                      cardCount: allUsers.length,
                       cardBuilder: (BuildContext context, int index) {
-                        return myItem(cards[index], 'Card $index');
+                        return myItem(allUsers[index], 'Card $index');
                       },
                     ),
                   ),
@@ -174,17 +171,22 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-Widget myItem(String image, String name) => Stack(
+Widget myItem(UserModel user, String name) => Stack(
       alignment: AlignmentDirectional.bottomStart,
       children: [
         Card(
             elevation: 20,
             clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: Image.asset(image)),
+            child: FancyShimmerImage(
+              imageUrl: user.profileImage,
+              height: 70.h,
+              width: 80.w,
+              boxFit: BoxFit.cover,
+            )),
         Padding(
           padding: const EdgeInsets.all(20.0),
           child: Text(
-            name,
+            user.name,
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
         ),
@@ -199,7 +201,6 @@ Future<List<UserModel>> getAllUsers() async {
     List<UserModel> users = [];
 
     querySnapshot.docs.forEach((doc) {
-      // Assuming UserModel is your data model class
       UserModel user = UserModel.toModel(doc.data() as Map<String, dynamic>);
       users.add(user);
     });
