@@ -214,7 +214,6 @@ class AuthController extends GetxController {
         }
         EasyLoading.dismiss();
         Get.offAll(HomeScreen());
-        // await Get.find<AuthServices>().sendEmailVarification();
       } else {
         EasyLoading.showError(str);
       }
