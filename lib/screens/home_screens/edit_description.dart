@@ -2,7 +2,6 @@ import 'package:datingapp/models/user_data.dart';
 import 'package:datingapp/widget/appbar_widget.dart';
 import 'package:flutter/material.dart';
 
-// This class handles the Page to edit the About Me Section of the User Profile.
 class EditDescriptionFormPage extends StatefulWidget {
   @override
   _EditDescriptionFormPageState createState() =>
@@ -47,7 +46,6 @@ class _EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
                         height: 250,
                         width: 350,
                         child: TextFormField(
-                          // Handles Form Validation
                           validator: (value) {
                             if (value == null ||
                                 value.isEmpty ||
@@ -75,7 +73,6 @@ class _EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
                           height: 50,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Validate returns true if the form is valid, or false otherwise.
                               if (_formKey.currentState!.validate()) {
                                 updateUserValue(descriptionController.text);
                                 Navigator.pop(context);

@@ -1,8 +1,8 @@
 import 'package:datingapp/models/user_data.dart';
 import 'package:datingapp/widget/appbar_widget.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
-// This class handles the Page to edit the Email Section of the User Profile.
 class EditEmailFormPage extends StatefulWidget {
   const EditEmailFormPage({Key? key}) : super(key: key);
 
@@ -51,7 +51,6 @@ class EditEmailFormPageState extends State<EditEmailFormPage> {
                         height: 100,
                         width: 320,
                         child: TextFormField(
-                          // Handles Form Validation
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your email.';
@@ -71,17 +70,14 @@ class EditEmailFormPageState extends State<EditEmailFormPage> {
                           height: 50,
                           child: ElevatedButton(
                             onPressed: () {
-                            //   if (_formKey.currentState!.validate() &&
-                            //       EmailValidator.validate(
-                            //           emailController.text)) {
-                            //     updateUserValue(emailController.text);
-                            //     Navigator.pop(context);
-                            //   }
+                              if (_formKey.currentState!.validate() &&
+                                  EmailValidator.validate(
+                                      emailController.text)) {
+                                updateUserValue(emailController.text);
+                                Navigator.pop(context);
+                              }
                             },
-                            child: const Text(
-                              'Update',
-                              style: TextStyle(fontSize: 15),
-                            ),
+                            child: Text('Submit'),
                           ),
                         )))
               ]),

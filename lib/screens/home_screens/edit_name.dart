@@ -3,7 +3,6 @@ import 'package:datingapp/widget/appbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 
-// This class handles the Page to edit the Name Section of the User Profile.
 class EditNameFormPage extends StatefulWidget {
   const EditNameFormPage({Key? key}) : super(key: key);
 
@@ -58,7 +57,6 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                           height: 100,
                           width: 150,
                           child: TextFormField(
-                            // Handles Form Validation for First Name
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your first name';
@@ -77,7 +75,6 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                           height: 100,
                           width: 150,
                           child: TextFormField(
-                            // Handles Form Validation for Last Name
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your last name';
@@ -101,13 +98,10 @@ class EditNameFormPageState extends State<EditNameFormPage> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Validate returns true if the form is valid, or false otherwise.
                             if (_formKey.currentState!.validate() &&
                                 isAlpha(firstNameController.text +
                                     secondNameController.text)) {
-                              updateUserValue(firstNameController.text +
-                                  " " +
-                                  secondNameController.text);
+                              updateUserValue("${firstNameController.text} ${secondNameController.text}");
                               Navigator.pop(context);
                             }
                           },

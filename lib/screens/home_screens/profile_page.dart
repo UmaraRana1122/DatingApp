@@ -61,7 +61,6 @@ class _ProfilepagState extends State<Profilepag> {
     );
   }
 
-  // Widget builds the display item with the proper formatting to display the user's info
   Widget buildUserInfoDisplay(String getValue, String title, Widget editPage) =>
       Padding(
           padding: EdgeInsets.only(bottom: 10),
@@ -157,12 +156,10 @@ class _ProfilepagState extends State<Profilepag> {
         ],
       ));
 
-  // Refrshes the Page after updating user info.
   FutureOr onGoBack(dynamic value) {
     setState(() {});
   }
 
-  // Handles navigation and prompts refresh.
   void navigateSecondPage(Widget editForm) {
     Route route = MaterialPageRoute(builder: (context) => editForm);
     Navigator.push(context, route).then(onGoBack);
