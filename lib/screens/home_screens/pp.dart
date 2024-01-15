@@ -1,250 +1,134 @@
-import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:datingapp/models/chat_model.dart';
-import 'package:datingapp/screens/auth/login.dart';
-import 'package:datingapp/services/loading.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
+import 'package:datingapp/widget/info_widget.dart';
+import 'package:datingapp/widget/placeholder.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
-import 'home_screen.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  final String title;
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final TextEditingController displayNameController = TextEditingController();
-
-  User? user = FirebaseAuth.instance.currentUser;
-  bool isloading = false;
-  DateTime? selectedDate;
-  UserModel1 loggedInUser = UserModel1();
-
-  File? _image;
-  String? downloadUrl;
-  final imagePicker = ImagePicker();
-  Future getImage() async {
-    final pick = await imagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (pick != null) {
-        _image = File(pick.path);
-      } else {
-        Exception;
-      }
-    });
-  }
-
-  Future uploadData() async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-    Reference ref = FirebaseStorage.instance
-        .ref()
-        .child('${user!.email}/image')
-        .child('post');
-    await ref.putFile(_image!);
-    downloadUrl = await ref.getDownloadURL();
-
-    await firebaseFirestore.collection('users').doc(user!.uid).update({
-      'displayName': displayNameController.text,
-      'dateOfBirth': selectedDate,
-      'photoUrl': downloadUrl,
-    }).catchError((e) {
-      if (kDebugMode) {
-        print(e);
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(user!.uid)
-        .get()
-        .then((value) {
-      loggedInUser = UserModel1.fromMap(value.data());
-      setState(() {});
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return isloading
-        ? const Loading()
-        : Scaffold(
-            appBar: AppBar(
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    logOut();
-                  },
-                  icon: const Icon(Icons.logout),
-                )
-              ],
-              elevation: 0,
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
+    return Stack(
+      children: <Widget>[
+        Container(
+          height: 50.h,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+            const Color(0xFF26CBE6),
+            const Color(0xFF26CBC0),
+          ], begin: Alignment.topCenter, end: Alignment.center)),
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 8.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/images/sarah.png'),
+                        radius: 7.h,
+                      ),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      Text(
+                        'Sarah Ali',
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 40.h),
+                child: Container(
                   color: Colors.white,
                 ),
               ),
-            ),
-            body: SingleChildScrollView(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+              Padding(
+                padding: EdgeInsets.only(top: 30.h, left: 4.w, right: 4.w),
                 child: Column(
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
-                          child: CircleAvatar(
-                            radius: 70,
-                            child: ClipOval(
-                                child: SizedBox(
-                                    width: 180,
-                                    height: 180,
-                                    child: _image != null
-                                        ? Image.file(
-                                            _image!,
-                                            fit: BoxFit.fill,
-                                          )
-                                        : Image.network(
-                                            loggedInUser.photoUrl ?? ''))),
-                          ),
-                        ),
-                        IconButton(
-                            onPressed: () {
-                              getImage();
-                            },
-                            icon: const Icon(Icons.photo_camera)),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        contentPadding:
-                            const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        hintText: '${loggedInUser.displayName}',
-                        prefixIcon: const Icon(Icons.person),
-                        fillColor: Colors.white,
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      validator: (value) =>
-                          value!.isEmpty ? 'Enter Display Name' : null,
-                      onChanged: (value) {
-                        setState(() {
-                          displayNameController.text = value;
-                        });
-                      },
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        contentPadding:
-                            const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        hintText: selectedDate == null
-                            ? '${loggedInUser.dateOfBirth}'
-                            : DateFormat.yMMMd().format(selectedDate!),
-                        prefixIcon: IconButton(
-                          onPressed: () {
-                            selectDate(context);
-                          },
-                          icon: const Icon(Icons.calendar_month),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      validator: (value) =>
-                          value!.isEmpty ? 'Enter DateOfBirth' : null,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedDate = value as DateTime?;
-                        });
-                      },
-                    ),
-                    const SizedBox(
-                      height: 30.0,
-                    ),
-                    Material(
-                      elevation: 5,
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.red,
-                      child: MaterialButton(
-                        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                        minWidth: MediaQuery.of(context).size.width,
-                        onPressed: () async {
-                          setState(() {
-                            isloading = true;
-                          });
-                          await uploadData();
-                          setState(() {
-                            isloading = false;
-                          });
-
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()),
-                              (route) => false);
-                        },
-                        child: const Text(
-                          'Update',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black45,
+                                blurRadius: 2.0,
+                                offset: Offset(0.0, 2.0))
+                          ]),
+                      child: Padding(
+                        padding: EdgeInsets.all(16.w),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              headerChild('Photos', 114),
+                              headerChild('Followers', 1205),
+                              headerChild('Following', 360),
+                            ]),
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.h),
+                      child: Column(
+                        children: [
+                          infoChild(Icons.email, 'zulfiqar108@gmail.com'),
+                          infoChild(Icons.call, '+12-1234567890'),
+                          infoChild(Icons.group_add, 'Add to group'),
+                          infoChild(Icons.chat_bubble, 'Show all comments'),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5.h),
+                            child: Container(
+                              width: 30.w,
+                              height: 5.h,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xFF26CBE6),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black87,
+                                        blurRadius: 2.0,
+                                        offset: Offset(0.0, 1.0))
+                                  ]),
+                              child: Center(
+                                child: Text('FOLLOW ME',
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              ),
-            ),
-          );
-  }
-
-  Future<void> logOut() async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const LoginScreen()));
-  }
-
-  Future selectDate(BuildContext context) async {
-    DateTime initialDate = DateTime.now();
-    DateTime firstDate = DateTime(1950);
-    DateTime lastDate = DateTime(2050);
-
-    final date = await showDatePicker(
-        context: context,
-        initialDate: initialDate,
-        firstDate: firstDate,
-        lastDate: lastDate);
-
-    if (date != null) {
-      setState(() {
-        selectedDate = date;
-      });
-    }
+              )
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
