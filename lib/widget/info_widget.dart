@@ -4,7 +4,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
         padding:  EdgeInsets.only(bottom: 8.0),
         child:  InkWell(
           child:  Row(
-            children: <Widget>[
+            children: [
                SizedBox(
                 width: 5.w,
               ),

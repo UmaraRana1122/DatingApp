@@ -58,6 +58,8 @@ dependencies:
   equatable: 
   intl: ^0.19.0
   fancy_shimmer_image: ^2.0.3
+  shared_preferences: ^2.2.2
+  string_validator: ^1.0.2
 
 
 
