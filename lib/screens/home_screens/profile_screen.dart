@@ -1,4 +1,3 @@
-
 import 'package:datingapp/widget/profile.dart';
 import 'package:datingapp/widget/text_widget.dart';
 import 'package:flutter/material.dart';
