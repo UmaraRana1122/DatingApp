@@ -12,6 +12,7 @@ import '../models/user_model.dart';
 class AuthController extends GetxController {
   int currentindex = 0;
 
+
   TextEditingController email = TextEditingController();
   TextEditingController name = TextEditingController();
   TextEditingController phone = TextEditingController();
